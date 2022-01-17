@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'AcceuilAd.dart';
+
 
 
 
@@ -379,7 +381,11 @@ class _SignupPageState extends State<SignupPage> with SingleTickerProviderStateM
                     onPressed: () async { try{
                       final newUser= await _auth.createUserWithEmailAndPassword(email: email, password: password);
                       if(newUser != null)
-                      {Navigator.of(context).pushReplacementNamed('/home');
+                      {Navigator.push(context,
+                          MaterialPageRoute<void>(
+                              builder:(BuildContext context) {
+                                return AcceuilAd();
+                              }));;
                       }
                     }
                     catch(e){

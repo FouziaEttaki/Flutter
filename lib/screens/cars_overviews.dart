@@ -8,11 +8,19 @@ class CarsOverviewScreen extends StatelessWidget{
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar:AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.blueGrey,
         foregroundColor: Colors.black,
         centerTitle: true,
         elevation: 0,
-        title: Text('okCar',
+        leading: IconButton(
+          onPressed: () async {
+            Navigator.of(context).pushReplacementNamed('/singin');
+          },
+          icon: Icon(Icons.arrow_back_ios,
+            size:20,
+            color:Colors.black,),
+        ),
+        title: Text('Cars',
             style: SubHeading),
       ) ,
       body: ListView(

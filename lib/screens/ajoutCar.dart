@@ -1,14 +1,25 @@
 import 'dart:io';
 
+//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ffff/screens/AcceuilAd.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
+
+
 
 
 class AjoutPage extends StatefulWidget{
+
   const AjoutPage({Key? key}) : super(key: key);
+
 
   @override
   _AjoutPageState createState() => _AjoutPageState();
@@ -21,15 +32,16 @@ class _AjoutPageState extends State<AjoutPage> with SingleTickerProviderStateMix
 */
 
 
-  late String title;
-  late double price;
-  late String path;
-  late String color;
-  late String gearbox;
-  late String fuel;
-  late String brand;
+  late String title='titre';
+  late String price='price';
+  late String path='titre';
+  late String color='titre';
+  late String gearbox='titre';
+  late String fuel='titre';
+  late String brand='titre';
 
-  //final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
 
 
   final titleEditingController = new TextEditingController();
@@ -60,9 +72,17 @@ class _AjoutPageState extends State<AjoutPage> with SingleTickerProviderStateMix
 
 
 
+  late Map data;
+  addData(){
+    //CollectionReference collectionReference = Firestore.instance.collection('Cars');
+  }
 
   @override
   Widget build(BuildContext context){
+
+
+
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -79,7 +99,9 @@ class _AjoutPageState extends State<AjoutPage> with SingleTickerProviderStateMix
           ),
         ),
         body: SingleChildScrollView(
+
         child: Container(
+
         padding: EdgeInsets.symmetric(horizontal: 40),
     height: MediaQuery.of(context).size.height - 50,
     width: double.infinity,
@@ -151,7 +173,7 @@ class _AjoutPageState extends State<AjoutPage> with SingleTickerProviderStateMix
 
       TextFormField(
         onChanged: (value){
-          price = value as double;
+          price = value;
         },
         autofocus: false,
         controller: priceEditingController,
@@ -304,9 +326,25 @@ class _AjoutPageState extends State<AjoutPage> with SingleTickerProviderStateMix
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0)),
           fillColor:  Colors.blueGrey,
-          onPressed: () {
+          onPressed: () async {
+          _firestore.collection('Cars').add({
+            'titre': title,
+            'price': price,
+            'path' : path,
+            'gearbox': gearbox,
+            'fuel': fuel,
+            'color': color,
+            'brand' : brand,
+          });
+          Navigator.push(context,
+              MaterialPageRoute<void>(
+                  builder:(BuildContext context) {
+                    return AcceuilAd();
+                  }));
+
 
           },
+
 
           child: Text("Enregistrer",
             style: TextStyle(

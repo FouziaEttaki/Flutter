@@ -1,3 +1,4 @@
+import 'package:ffff/screens/AcceuilAd.dart';
 import 'package:ffff/screens/inscription.dart';
 import 'package:ffff/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'inscription.dart';
+
 
 
 /*
@@ -262,14 +263,8 @@ class LoginScreen extends StatefulWidget{
   const LoginScreen({Key? key}) : super(key: key);
   @override
   _LoginScreenState createState() => _LoginScreenState();
-
-
 }
-
 class _LoginScreenState extends State<LoginScreen> {
-
-
-
   //Login Fonction
   static Future<User?> loginUsingEmailPassword({
     required String email,
@@ -288,8 +283,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     return user;
   }
-
-
   @override
   Widget build(BuildContext context) {
     //create the textfieled controller
@@ -314,7 +307,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
 
           ),),
-          const Text("Login to your Application", style: TextStyle(
+         /* const Text("Login to your Application", style: TextStyle(
             color: Colors.black,
             fontSize: 25.0,
             fontWeight: FontWeight.normal,
@@ -323,7 +316,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           ),
 
-          ),
+          ),*/
 
           const SizedBox(
             height: 44.0,
@@ -370,7 +363,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }, ));
                     },
                     child: Container(
-                      child: const Text("Don't Remembre your Password?",
+                      child: const Text("Vous n'avez pas de compte?",
                         style: TextStyle(
                             color: Colors.blueGrey),
                       ),
@@ -402,7 +395,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 User? user = await loginUsingEmailPassword(email: _emailController.text, password: _passwordController.text, context: context);
                 print (user);
                 if(user != null){
-                  Navigator.of(context).pushReplacementNamed('/home');
+                  Navigator.push(context,
+                      MaterialPageRoute<void>(
+                          builder:(BuildContext context) {
+                            return AcceuilAd();
+                          }));
                   
                 }
               },
@@ -413,6 +410,35 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+
+
+),
+
+    const SizedBox(
+    height: 20.0,
+    ),
+    Container(
+    width: double.infinity,
+    child: RawMaterialButton(
+    fillColor:  Colors.blueGrey,
+    elevation: 0.0,
+    padding: const EdgeInsets.symmetric(vertical: 20.0),
+    shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(12.0)),
+
+    onPressed: () async{
+
+    Navigator.of(context).pushReplacementNamed('/home');
+
+
+    },
+    child: const Text("Skip >>>",
+    style: TextStyle(
+    color: Colors.white,
+    fontSize: 18.0,
+    ),
+    ),
+    ),
 
           ),
         ],

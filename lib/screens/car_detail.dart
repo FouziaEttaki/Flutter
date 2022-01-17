@@ -30,7 +30,8 @@ class CarDetail extends StatelessWidget{
 
 
       appBar:AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.blueGrey,
+        title: Text('Detail du voiture',style: TextStyle(color: Colors.white),),
         actions:[
           IconButton(icon: Icon(Icons.bookmark, size:30,
           color: Theme.of(context).cardColor), onPressed: null,),
